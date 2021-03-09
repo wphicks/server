@@ -43,11 +43,13 @@ namespace nvidia { namespace inferenceserver {
 
 namespace {
 
+#ifdef TRITON_ENABLE_STATS
 void CUDART_CB
 TimestampCaptureCallback(void* data)
 {
   INFER_STATS_SET_TIMESTAMP(*(reinterpret_cast<uint64_t*>(data)));
 }
+#endif  // TRITON_ENABLE_STATS
 
 Status
 CreateCudaEvent(
